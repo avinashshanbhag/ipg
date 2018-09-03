@@ -1,0 +1,56 @@
+
+== IPG Database Script to update latest snapshot ===
+
+Avinash,
+
+I will include the directions in the document when I send it out updated, but here they are for you to get started.
+Here is the version of mysql I am running:
+Server version: 5.7.10 MySQL Community Server (GPL)
+
+And here is the process I use to open and use the database snapshot that Ashish sends me
+
+
+Open Terminal (on your mac)
+Log into your mysql:
+     mysql -u root -p
+Create a new database for the snapshot, I always name it after the date so I can make sure I'm using the correct one:
+    CREATE DATABASE Aug29;
+Log out of mysql
+    \q
+Load the database dump file into your new database:
+    mysql -u root -p Aug29 < Documents/ipg_db_dumps/name_of_dump_file.sql
+this step takes quite a while to process, so leave that running until it's finished, then check that the database populated properly
+    mysql -u root -p
+    use Aug29;
+    SELECT * FROM webform_submissions LIMIT 10;
+If the above query returns responses then it worked, if it returns an error, it did not.
+If the database is properly working, I delete any old instances I have to ensure I'm working with the most recent data
+
+
+==== Log into mysql ====
+mysql -u root -p
+
+=== Create new database
+>create database XXX;
+
+=== Load database dump file into database (run from terminal) ====
+mysql -u root -p XXX < <full path>/name_of_dump_file.sql
+
+=== Connect to the database ====
+use XXX;
+
+==== Showing databases ===
+>Show databases;
+
+==== Drop database ====
+>drop database XXX;
+
+==== Exit the mysql console ====
+\q;
+
+
+==== Test the load ====
+>SELECT * FROM webform_submissions LIMIT 10;
+
+
+
